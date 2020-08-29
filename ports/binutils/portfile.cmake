@@ -1,5 +1,14 @@
 vcpkg_fail_port_install(ON_TARGET "OSX" "Windows" "UWP")
 
+execute_process(COMMAND ${SOURCE_PATH}/config.guess OUTPUT_VARIABLE MACHINE_HOST)
+set(TARGET_MACHINE "")
+if ("${VCPKG_TARGET_ARCHITECTURE}" STREQUAL "x64" AND "${VCPKG_CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+    set(MACHINE_TARGET x86_64-pc-linux-gnu)
+else()
+    #for future cross-build
+    message(FATAL_ERROR "Unsupported target architecture for ${PORT}: ${VCPKG_TARGET_ARCHITECTURE} / ${VCPKG_CMAKE_SYSTEM_NAME}")
+endif()
+
 set(TARGET_VERSION 2.34)
 vcpkg_download_distfile(ARCHIVE
     URLS "http://ftp.gnu.org/gnu/binutils/binutils-${TARGET_VERSION}.tar.xz"
@@ -19,7 +28,7 @@ set(ENV{MAKEINFO} "${CURRENT_INSTALLED_DIR}/tools/texinfo/bin/makeinfo")
 vcpkg_configure_make(
     AUTOCONFIG
     SOURCE_PATH ${SOURCE_PATH}
-    OPTIONS --disable-nls --disable-werror --disable-docs
+    OPTIONS --disable-nls --disable-werror --disable-docs --target=${MACHINE_TARGET}
 )
 
 vcpkg_install_make()

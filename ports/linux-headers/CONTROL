@@ -1,0 +1,4 @@
+Source: linux-headers
+Version: 5.5.3
+Homepage: https://www.kernel.org/
+Description: Linux headers files for glibc.
