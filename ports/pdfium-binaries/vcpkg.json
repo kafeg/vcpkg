@@ -1,0 +1,19 @@
+{
+  "name": "pdfium-binaries",
+  "version": "6164",
+  "port-version": 1,
+  "description": "Library to render PDF files. Uses specific build system https://github.com/bblanchon/pdfium-binaries",
+  "homepage": "https://pdfium.googlesource.com/pdfium/",
+  "license": " Apache-2.0",
+  "dependencies": [
+    {"name" : "vcpkg-cmake", "host" : true },
+    {"name": "vcpkg-cmake-config", "host": true },
+    "icu",
+    "lcms",
+    "libjpeg-turbo",
+    "openjpeg",
+    "bzip2",
+    "libpng",
+    "freetype"
+  ]
+}
